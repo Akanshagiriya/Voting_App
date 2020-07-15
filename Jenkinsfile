@@ -8,7 +8,7 @@ pipeline {
             stage('package'){
                 steps{
                         bat '''
-                            cd VotingApp
+                            cd Voting_App
                              mvn clean package
                              mvn clean install
                              mvn -B verify
@@ -20,7 +20,7 @@ pipeline {
                          steps {
                              git 'https://github.com/Akanshagiriya/Voting_App.git'
                            bat '''
-                             cd VotingApp
+                            cd Voting_App
                             mvn clean install
                            '''
                          }
@@ -28,7 +28,7 @@ pipeline {
           stage('SonarQube') {
             steps{
                 bat '''
-                     cd VotingApp
+                    cd Voting_App
                     mvn sonar:sonar \
                       -Dsonar.projectKey=VotingApp \
                       -Dsonar.host.url=http://localhost:9000 \
@@ -43,7 +43,7 @@ pipeline {
         	    }
     		steps {
     		    bat '''
-    		        cd VotingApp
+    		        cd Voting_App
             		    java -version
             			mvn -version
             			mvn clean package
