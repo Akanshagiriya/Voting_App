@@ -1,14 +1,6 @@
 pipeline {
     agent any
         stages {
-            stage("Building SONAR ...") {
-                      steps {
-                           bat '''
-                            
-                                 mvn clean install
-                               '''
-                             }
-               }
             stage('SonarQube') {
             steps{
                 bat '''
