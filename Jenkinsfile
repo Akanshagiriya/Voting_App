@@ -4,7 +4,7 @@ pipeline {
             stage("Building SONAR ...") {
                steps {
                    bat '''
-                       cd Voting_App
+                       cd worker
                        mvn clean install
                        '''
                     }
