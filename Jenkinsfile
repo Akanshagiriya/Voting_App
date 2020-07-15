@@ -13,6 +13,7 @@ pipeline {
             stage('SonarQube') {
             steps{
                 bat '''
+                    cd worker
                     mvn sonar:sonar \
                       -Dsonar.projectKey=VotingApp \
                       -Dsonar.host.url=http://localhost:9000 \
@@ -29,6 +30,7 @@ pipeline {
                          steps {
                              git 'https://github.com/Akanshagiriya/Voting_App.git'
                            bat '''
+                           cd worker
                             java -version
             			    mvn -version
             			    mvn clean package
