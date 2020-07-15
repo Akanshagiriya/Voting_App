@@ -8,7 +8,7 @@ pipeline {
             stage('package'){
                 steps{
                         bat '''
-                            cd voting-app
+                            cd VotingApp
                              mvn clean package
                              mvn clean install
                              mvn -B verify
@@ -20,7 +20,7 @@ pipeline {
                          steps {
                              git 'https://github.com/Akanshagiriya/Voting_App.git'
                            bat '''
-                            cd voting-app
+                             cd VotingApp
                             mvn clean install
                            '''
                          }
@@ -28,22 +28,13 @@ pipeline {
           stage('SonarQube') {
             steps{
                 bat '''
-                    cd voting-app
+                     cd VotingApp
                     mvn sonar:sonar \
-                     -Dsonar.projectKey=Happy-Trip \
-                     -Dsonar.host.url=http://localhost:9000 \
-                     -Dsonar.login=b5c2c3f618a864f53fe1b11d828705a98f2f887d
+                      -Dsonar.projectKey=VotingApp \
+                      -Dsonar.host.url=http://localhost:9000 \
+                      -Dsonar.login=dfd5ca3e624a63fbb5fc9d2d410c8eaf6f04605e
                 '''
             } 
-        }
-        stage('Approval') {
-            agent none
-            steps {
-                script {
-                    def deploymentDelay = input id: 'Deploy', message: 'Deploy to production?', submitter: 'rkivisto,admin', parameters: [choice(choices: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'], description: 'Hours to delay deployment?', name: 'deploymentDelay')]
-                    sleep time: deploymentDelay.toInteger(), unit: 'HOURS'
-                }
-            }
         }
         stage('Build') { 
         	tools {	
@@ -52,7 +43,7 @@ pipeline {
         	    }
     		steps {
     		    bat '''
-    		        cd voting-app
+    		        cd VotingApp
             		    java -version
             			mvn -version
             			mvn clean package
